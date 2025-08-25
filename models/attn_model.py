@@ -63,7 +63,7 @@ class AttentionModel(Model):
             data_range = ((3, 3+instruction_len), (-5-data_len, -5))
         elif "phi3" in self.name:
             data_range = ((1, 1+instruction_len), (-2-data_len, -2))
-        elif "llama3-8b" in self.name:
+        elif "llama3" in self.name:
             data_range = ((5, 5+instruction_len), (-5-data_len, -5))
         elif "mistral-7b" in self.name:
             data_range = ((3, 3+instruction_len), (-1-data_len, -1))
