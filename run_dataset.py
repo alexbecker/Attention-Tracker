@@ -33,8 +33,13 @@ def main(args):
 
     dataset = load_dataset(args.dataset_name)
     test_data = dataset['test']
-    
-    detector = AttentionDetector(model)
+
+    train_data = dataset['train']
+    train_data = train_data.filter(lambda x: len(x["text"]) < 500)  # Take pity on my VRAM
+    pos_examples = random.sample(train_data.filter(lambda x: x["label"] == 1)["text"], 50)
+    neg_examples = random.sample(train_data.filter(lambda x: x["label"] == 0)["text"], 50)
+
+    detector = AttentionDetector(model, pos_examples=pos_examples, neg_examples=neg_examples)
     print("===================")
     print(f"Using detector: {detector.name}")
 
